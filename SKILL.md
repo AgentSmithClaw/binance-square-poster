@@ -1,14 +1,34 @@
 # crypto-news-automation
 
-自动收集加密货币热点资讯，生成每日要点，并自动发布到币安广场。
+自动收集加密货币、科技、AI、金融热点资讯，生成每日要点，并自动发布到币安广场。
 
 ## 功能
 
-- **资讯抓取**：从多个 RSS 源自动抓取最新加密货币资讯
+- **多维资讯抓取**：从多个 RSS 源自动抓取加密货币、科技、AI、金融资讯
 - **文章生成**：资讯速递 + 技术面分析（24h热门波动币）
+- **分类筛选**：支持按分类（crypto/tech/finance）筛选资讯
 - **API 发帖**：使用币安 Square OpenAPI 自动发布
 - **审核模式**：发布前展示内容供用户确认
 - **定时执行**：支持每天固定时间自动运行
+
+---
+
+## 📡 资讯来源（7个RSS源）
+
+### 加密货币
+| 来源 | URL | 状态 |
+|------|-----|------|
+| Cryptonews | https://cryptonews.com/news/feed/ | ✅ |
+| CoinTelegraph | https://cointelegraph.com/rss | ✅ |
+| BitCoinist | https://bitcoinist.com/feed/ | ✅ |
+| Decrypt | https://decrypt.co/feed | ✅ |
+
+### 科技/AI
+| 来源 | URL | 状态 |
+|------|-----|------|
+| TechCrunch | https://techcrunch.com/feed/ | ✅ |
+| Wired | https://www.wired.com/feed/rss | ✅ |
+| HackerNews | https://hnrss.org/frontpage | ✅ |
 
 ---
 
@@ -70,6 +90,8 @@
 3. **技术面**：每个币种4行，包含价格、涨跌、成交量、排名、走势
 4. **不显示来源**：资讯速递不要显示 "来源: xxx"
 5. **飞书API**：content字段必须是JSON字符串格式
+6. **自动抓取**：generate-article.js 会自动先调用 fetch-news.js 抓取最新资讯
+7. **时间排序**：资讯按发布时间排序，最新的在前
 
 ---
 
@@ -150,7 +172,55 @@ curl -X POST 'https://www.binance.com/bapi/composite/v1/public/pgc/openApi/conte
 
 ---
 
+## 📁 文件结构
+
+```
+crypto-news-automation/
+├── SKILL.md                    # 技能文档
+├── index.js                   # 主入口
+├── config/
+│   └── config.json           # 配置文件（RSS源列表）
+├── data/
+│   ├── latest-news.json      # 最新资讯缓存
+│   ├── today-article.json    # 今日文章
+│   └── pending-post.txt    # 待发布内容
+└── scripts/
+    ├── fetch-news.js        # 抓取资讯
+    ├── generate-summary.js  # 生成摘要
+    ├── generate-article.js # 生成文章（自动抓取+生成）
+    ├── post-to-binance.js  # API发帖
+    ├── post-with-browser.js # 浏览器发帖
+    └── save-login-state.js # 保存登录状态
+```
+
+---
+
+## ⚙️ 配置说明
+
+### config.json 结构
+```json
+{
+  "sources": [
+    {"name": "名称", "url": "RSS链接", "enabled": true, "category": "crypto|tech|finance"}
+  ],
+  "publish": {
+    "platform": "binance-square",
+    "minNews": 5,
+    "reviewBeforePost": true,
+    "schedule": ["09:00", "12:00", "15:00", "18:00", "20:00", "23:00"]
+  }
+}
+```
+
+---
+
 ## 更新记录
+
+### 2026-03-09 14:10
+- 新增资讯来源：TechCrunch, Wired, HackerNews
+- 支持分类筛选：crypto/tech/finance
+- 修复资讯按时间排序问题
+- generate-article.js 自动先抓取资讯
 
 ### 2026-03-09 13:50
 - 整合官方 binance-square-post skill

@@ -1,52 +1,52 @@
 {
-  "part1": "【资讯速递】\n\n1. 佛罗里达州议员推进首个州级稳定币监管法案\n   来源: Cryptonews\n\n2. Trump’s National Cyber Strategy Backs Crypto Security in Post-Quantum Era\n   来源: Cryptonews\n\n3. Kalshi和Polymarket讨论200亿美元估值融资\n   来源: Cryptonews\n\n4. 华盛顿男子因将3500万美元转移至失败的DeFi平台被判2年\n   来源: Cryptonews\n\n5. Kalshi因哈梅内伊预测市场赔付面临集体诉讼\n   来源: Cryptonews",
-  "part2": "1. $SUI (Sui)\n   当前价格: $0.903 | 24h涨跌: +2.48%\n   24h成交量: $376.14M | 市值排名: #29\n   走势判断: 📈 看涨 | 小幅震荡\n\n2. $PEPE (Pepe)\n   当前价格: $0 | 24h涨跌: +2.38%\n   24h成交量: $272.69M | 市值排名: #55\n   走势判断: 📈 看涨 | 小幅震荡\n\n3. $AVAX (Avalanche)\n   当前价格: $9.02 | 24h涨跌: +1.89%\n   24h成交量: $225.07M | 市值排名: #28\n   走势判断: 📈 看涨 | 小幅震荡\n\n4. $ETH (Ethereum)\n   当前价格: $1,984.97 | 24h涨跌: +1.74%\n   24h成交量: $19.41B | 市值排名: #2\n   走势判断: 📈 看涨 | 小幅震荡\n\n5. $XAUT (Tether Gold)\n   当前价格: $5,057.96 | 24h涨跌: -1.73%\n   24h成交量: $546.02M | 市值排名: #34\n   走势判断: 📉 看跌 | 小幅震荡",
-  "timestamp": "2026-03-09T04:35:14.979Z",
+  "part1": "【资讯速递】\n\n1. Samson Mow Calls Bitcoin ‘Exponential Gold’, Predicts What Will Happen\n\n2. 佛罗里达州议员推进首个州级稳定币监管法案\n\n3. 后量子时代转移可能迫使加密交易所重新考虑钱包安全\n\n4. Ring&#8217;s Jamie Siminoff has been trying to calm privacy fears since the Super Bowl, but his answers may not help\n\n5. Kalshi和Polymarket讨论200亿美元估值融资",
+  "part2": "1. $AVAX (Avalanche)\n   当前价格: $9.23 | 24h涨跌: +4.21%\n   24h成交量: $255.98M | 市值排名: #28\n   走势判断: 📈 看涨 | 小幅震荡\n\n2. $SUI (Sui)\n   当前价格: $0.916 | 24h涨跌: +3.39%\n   24h成交量: $401.00M | 市值排名: #29\n   走势判断: 📈 看涨 | 小幅震荡\n\n3. $PEPE (Pepe)\n   当前价格: $0 | 24h涨跌: +3.35%\n   24h成交量: $283.54M | 市值排名: #55\n   走势判断: 📈 看涨 | 小幅震荡\n\n4. $ETH (Ethereum)\n   当前价格: $2,006.01 | 24h涨跌: +2.92%\n   24h成交量: $19.81B | 市值排名: #2\n   走势判断: 📈 看涨 | 小幅震荡\n\n5. $LINK (Chainlink)\n   当前价格: $8.82 | 24h涨跌: +2.49%\n   24h成交量: $328.18M | 市值排名: #18\n   走势判断: 📈 看涨 | 小幅震荡",
+  "timestamp": "2026-03-09T06:14:02.086Z",
   "coins": [
+    {
+      "symbol": "AVAX",
+      "name": "Avalanche",
+      "price": 9.23,
+      "change24h": 4.20846,
+      "volume": 255978117,
+      "marketCap": 3987002126,
+      "rank": 28
+    },
     {
       "symbol": "SUI",
       "name": "Sui",
-      "price": 0.903392,
-      "change24h": 2.47555,
-      "volume": 376144678,
-      "marketCap": 3523479522,
+      "price": 0.916271,
+      "change24h": 3.39025,
+      "volume": 400996599,
+      "marketCap": 3572343302,
       "rank": 29
     },
     {
       "symbol": "PEPE",
       "name": "Pepe",
-      "price": 0.00000327,
-      "change24h": 2.3833,
-      "volume": 272692259,
-      "marketCap": 1376489797,
+      "price": 0.0000033,
+      "change24h": 3.34808,
+      "volume": 283543586,
+      "marketCap": 1390410994,
       "rank": 55
-    },
-    {
-      "symbol": "AVAX",
-      "name": "Avalanche",
-      "price": 9.02,
-      "change24h": 1.88983,
-      "volume": 225068386,
-      "marketCap": 3896407877,
-      "rank": 28
     },
     {
       "symbol": "ETH",
       "name": "Ethereum",
-      "price": 1984.97,
-      "change24h": 1.73652,
-      "volume": 19410037886,
-      "marketCap": 239577797951,
+      "price": 2006.01,
+      "change24h": 2.91758,
+      "volume": 19806728109,
+      "marketCap": 242106903354,
       "rank": 2
     },
     {
-      "symbol": "XAUT",
-      "name": "Tether Gold",
-      "price": 5057.96,
-      "change24h": -1.73256,
-      "volume": 546021545,
-      "marketCap": 2855457908,
-      "rank": 34
+      "symbol": "LINK",
+      "name": "Chainlink",
+      "price": 8.82,
+      "change24h": 2.48521,
+      "volume": 328176865,
+      "marketCap": 6248989066,
+      "rank": 18
     }
   ]
 }
