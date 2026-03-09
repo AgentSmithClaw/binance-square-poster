@@ -1,0 +1,14 @@
+{
+  "sources": [
+    { "name": "Cryptonews", "url": "https://cryptonews.com/news/feed/", "enabled": true },
+    { "name": "CoinDesk", "url": "https://www.coindesk.com/feed/", "enabled": true },
+    { "name": "BTCManager", "url": "https://btcmanager.com/feed/", "enabled": true },
+    { "name": "CoinTelegraph", "url": "https://cointelegraph.com/rss", "enabled": true }
+  ],
+  "publish": {
+    "platform": "binance-square",
+    "minNews": 5,
+    "reviewBeforePost": true,
+    "schedule": ["09:00", "12:00", "15:00", "18:00", "20:00", "23:00"]
+  }
+}

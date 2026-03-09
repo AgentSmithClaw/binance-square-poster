@@ -1,0 +1,52 @@
+{
+  "part1": "【资讯速递】\n\n1. 佛罗里达州议员推进首个州级稳定币监管法案\n   来源: Cryptonews\n\n2. Trump’s National Cyber Strategy Backs Crypto Security in Post-Quantum Era\n   来源: Cryptonews\n\n3. Kalshi和Polymarket讨论200亿美元估值融资\n   来源: Cryptonews\n\n4. 华盛顿男子因将3500万美元转移至失败的DeFi平台被判2年\n   来源: Cryptonews\n\n5. Kalshi因哈梅内伊预测市场赔付面临集体诉讼\n   来源: Cryptonews",
+  "part2": "1. $XAUT (Tether Gold)\n   当前价格: $5,058.34 | 24h涨跌: -1.69%\n   24h成交量: $577.28M | 市值排名: #34\n   走势判断: 📉 看跌 | 小幅震荡\n\n2. $ETH (Ethereum)\n   当前价格: $1,976.99 | 24h涨跌: +1.49%\n   24h成交量: $17.31B | 市值排名: #2\n   走势判断: 📈 看涨 | 小幅震荡\n\n3. $PAXG (PAX Gold)\n   当前价格: $5,100.46 | 24h涨跌: -1.47%\n   24h成交量: $410.78M | 市值排名: #37\n   走势判断: 📉 看跌 | 小幅震荡\n\n4. $SUI (Sui)\n   当前价格: $0.894 | 24h涨跌: +1.45%\n   24h成交量: $364.86M | 市值排名: #29\n   走势判断: 📈 看涨 | 小幅震荡\n\n5. $TRX (TRON)\n   当前价格: $0.29 | 24h涨跌: +1.39%\n   24h成交量: $495.20M | 市值排名: #8\n   走势判断: 📈 看涨 | 小幅震荡",
+  "timestamp": "2026-03-09T04:00:06.181Z",
+  "coins": [
+    {
+      "symbol": "XAUT",
+      "name": "Tether Gold",
+      "price": 5058.34,
+      "change24h": -1.69269,
+      "volume": 577280048,
+      "marketCap": 2855719006,
+      "rank": 34
+    },
+    {
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "price": 1976.99,
+      "change24h": 1.48906,
+      "volume": 17313519381,
+      "marketCap": 238446457146,
+      "rank": 2
+    },
+    {
+      "symbol": "PAXG",
+      "name": "PAX Gold",
+      "price": 5100.46,
+      "change24h": -1.47246,
+      "volume": 410780661,
+      "marketCap": 2535247505,
+      "rank": 37
+    },
+    {
+      "symbol": "SUI",
+      "name": "Sui",
+      "price": 0.894414,
+      "change24h": 1.45394,
+      "volume": 364856901,
+      "marketCap": 3487928530,
+      "rank": 29
+    },
+    {
+      "symbol": "TRX",
+      "name": "TRON",
+      "price": 0.290393,
+      "change24h": 1.38565,
+      "volume": 495196766,
+      "marketCap": 27515575201,
+      "rank": 8
+    }
+  ]
+}
