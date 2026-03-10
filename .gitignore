@@ -45,3 +45,4 @@ credentials.json
 
 # Keep these to preserve directory structure
 !data/.gitkeep
+state/

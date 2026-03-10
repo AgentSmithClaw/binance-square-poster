@@ -22,7 +22,10 @@ if (!API_KEY) {
   console.error("❌ 错误: 未配置 BINANCE_API_KEY，请先在 ~/.openclaw/openclaw.json 中配置");
   process.exit(1);
 }
-console.log("✅ API_KEY 来源: BINANCE_API_KEY (前缀: " + API_KEY.substring(0, 8) + "...后缀: ..." + API_KEY.substring(API_KEY.length - 4) + ")");
+// 仅 debug 模式打印 key 前后缀
+if (process.env.DEBUG === 'true') {
+  console.log("✅ API_KEY 来源: BINANCE_API_KEY (前缀: " + API_KEY.substring(0, 8) + "...后缀: ..." + API_KEY.substring(API_KEY.length - 4) + ")");
+}
 
 // 读取最新生成的文章
 const dataDir = path.join(__dirname, '..', 'data');
