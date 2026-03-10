@@ -256,17 +256,24 @@ async function generateArticle() {
       }
     }
     
-    // 获取其他资讯（去重）
+    // 获取其他资讯（去重）- 改为取更多备用
     const otherNews = [];
     for (const item of sorted) {
-      if (otherNews.length >= 1) break;
+      if (otherNews.length >= 3) break;  // 增加到3条备用
       if (!isUsed(item.title)) {
         otherNews.push(item);
         markUsed(item.title);
       }
     }
     
-    const mixed = [...cryptoNews, ...techNews, ...otherNews].slice(0, 5);
+    // 确保凑够5条：先取2+2+1，不够再从other补
+    let mixed = [...cryptoNews, ...techNews, ...otherNews];
+    while (mixed.length < 5 && otherNews.length > 0) {
+      // 从otherNews中补充
+      const extra = otherNews.shift();
+      if (extra) mixed.push(extra);
+    }
+    mixed = mixed.slice(0, 5);
     
     newsContent = '【资讯速递】\n';
     const translated = await Promise.all(mixed.map(async function(item, i) {
