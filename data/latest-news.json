@@ -240,9 +240,17 @@
     "source": "Wired"
   },
   {
+    "title": "Redox OS has adopted a Certificate of Origin policy and a strict no-LLM policy",
+    "link": "https://gitlab.redox-os.org/redox-os/redox/-/blob/master/CONTRIBUTING.md",
+    "description": "<p>Article URL: <a href=\"https://gitlab.redox-os.org/redox-os/redox/-/blob/master/CONTRIBUTING.md\">https://gitlab.redox-os.org/redox-os/redox/-/blob/master/CONTRIBUTING.md</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47320661\">https://news.ycombinator.com/item?id=47320661</a></p>\n<p>Points: 11</p>\n<p># Comments: 0</p>",
+    "pubDate": "Tue, 10 Mar 2026 08:54:53 +0000",
+    "category": "",
+    "source": "HackerNews"
+  },
+  {
     "title": "LoGeR – 3D reconstruction from extremely long videos (DeepMind, UC Berkeley)",
     "link": "https://loger-project.github.io",
-    "description": "<p>Article URL: <a href=\"https://loger-project.github.io\">https://loger-project.github.io</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47319620\">https://news.ycombinator.com/item?id=47319620</a></p>\n<p>Points: 15</p>\n<p># Comments: 6</p>",
+    "description": "<p>Article URL: <a href=\"https://loger-project.github.io\">https://loger-project.github.io</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47319620\">https://news.ycombinator.com/item?id=47319620</a></p>\n<p>Points: 18</p>\n<p># Comments: 7</p>",
     "pubDate": "Tue, 10 Mar 2026 06:16:06 +0000",
     "category": "",
     "source": "HackerNews"
@@ -250,7 +258,7 @@
   {
     "title": "Show HN: I Was Here – Draw on street view, others can find your drawings",
     "link": "https://washere.live",
-    "description": "<p>Hey HN, I made a site where you can draw on street-level panoramas. Your drawings persist and other people can see them in real time.<p>Strokes get projected onto the 3D panorama so they wrap around buildings and follow the geometry, not just a flat overlay. Uses WebGL2 for rendering, Mapillary for the street imagery.<p>The idea is for it to become a global canvas, anyone can leave a mark anywhere and others stumble onto it.</p>\n<hr>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47319255\">https://news.ycombinator.com/item?id=47319255</a></p>\n<p>Points: 21</p>\n<p># Comments: 13</p>",
+    "description": "<p>Hey HN, I made a site where you can draw on street-level panoramas. Your drawings persist and other people can see them in real time.<p>Strokes get projected onto the 3D panorama so they wrap around buildings and follow the geometry, not just a flat overlay. Uses WebGL2 for rendering, Mapillary for the street imagery.<p>The idea is for it to become a global canvas, anyone can leave a mark anywhere and others stumble onto it.</p>\n<hr>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47319255\">https://news.ycombinator.com/item?id=47319255</a></p>\n<p>Points: 21</p>\n<p># Comments: 14</p>",
     "pubDate": "Tue, 10 Mar 2026 05:04:23 +0000",
     "category": "",
     "source": "HackerNews"
@@ -258,7 +266,7 @@
   {
     "title": "Learnings from paying artists royalties for AI-generated art",
     "link": "https://www.kapwing.com/blog/learnings-from-paying-artists-royalties-for-ai-generated-art/",
-    "description": "<p>Article URL: <a href=\"https://www.kapwing.com/blog/learnings-from-paying-artists-royalties-for-ai-generated-art/\">https://www.kapwing.com/blog/learnings-from-paying-artists-royalties-for-ai-generated-art/</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47318421\">https://news.ycombinator.com/item?id=47318421</a></p>\n<p>Points: 126</p>\n<p># Comments: 93</p>",
+    "description": "<p>Article URL: <a href=\"https://www.kapwing.com/blog/learnings-from-paying-artists-royalties-for-ai-generated-art/\">https://www.kapwing.com/blog/learnings-from-paying-artists-royalties-for-ai-generated-art/</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47318421\">https://news.ycombinator.com/item?id=47318421</a></p>\n<p>Points: 127</p>\n<p># Comments: 95</p>",
     "pubDate": "Tue, 10 Mar 2026 02:24:52 +0000",
     "category": "",
     "source": "HackerNews"
@@ -266,16 +274,8 @@
   {
     "title": "The “JVG algorithm” only wins on tiny numbers",
     "link": "https://scottaaronson.blog/?p=9615",
-    "description": "<p>Article URL: <a href=\"https://scottaaronson.blog/?p=9615\">https://scottaaronson.blog/?p=9615</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47317739\">https://news.ycombinator.com/item?id=47317739</a></p>\n<p>Points: 60</p>\n<p># Comments: 30</p>",
+    "description": "<p>Article URL: <a href=\"https://scottaaronson.blog/?p=9615\">https://scottaaronson.blog/?p=9615</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47317739\">https://news.ycombinator.com/item?id=47317739</a></p>\n<p>Points: 61</p>\n<p># Comments: 31</p>",
     "pubDate": "Tue, 10 Mar 2026 00:35:19 +0000",
-    "category": "",
-    "source": "HackerNews"
-  },
-  {
-    "title": "Two Years of Emacs Solo",
-    "link": "https://www.rahuljuliato.com/posts/emacs-solo-two-years",
-    "description": "<p>Article URL: <a href=\"https://www.rahuljuliato.com/posts/emacs-solo-two-years\">https://www.rahuljuliato.com/posts/emacs-solo-two-years</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=47317616\">https://news.ycombinator.com/item?id=47317616</a></p>\n<p>Points: 230</p>\n<p># Comments: 58</p>",
-    "pubDate": "Tue, 10 Mar 2026 00:16:44 +0000",
     "category": "",
     "source": "HackerNews"
   }

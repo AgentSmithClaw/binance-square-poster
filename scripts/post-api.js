@@ -189,7 +189,7 @@ async function main() {
   console.log('📤 开始API发帖流程...');
   console.log('当前工作目录:', process.cwd());
   console.log('__filename:', __filename);
-  console.log('API_KEY 已读取');
+  if (process.env.DEBUG === 'true') { console.log('API_KEY 已读取'); }
   
   try {
     // 1. 校验 content
