@@ -1,53 +1,91 @@
 {
-  "part1": "【资讯速递】\n1. SharpLink博彩股票报告与ETH Holdings相关的$ 7.34亿美元亏损\n2. 电动空中出租车制造商Archer在反诉中回击Joby ，指控隐瞒中国关系\n3. “飞行汽车”将于今年夏天在美国的天空中起飞\n4. 银行需要清晰度不仅仅是加密–前CFTC主席解释原因",
-  "part2": "1. $HYPE (Hyperliquid)\n- 当前价格: $34.86 | 24h涨跌: +12.32%\n- 24h成交量: $536.87M | 市值排名: #16\n- 走势判断: 📈 看涨 | 波动剧烈\n\n2. $ZEC (Zcash)\n- 当前价格: $221.11 | 24h涨跌: +7.65%\n- 24h成交量: $319.26M | 市值排名: #30\n- 走势判断: 📈 看涨 | 波动剧烈\n\n3. $SUI (Sui)\n- 当前价格: $0.966 | 24h涨跌: +6.95%\n- 24h成交量: $698.19M | 市值排名: #29\n- 走势判断: 📈 看涨 | 波动剧烈\n\n4. $AAVE (Aave)\n- 当前价格: $112.08 | 24h涨跌: +5.28%\n- 24h成交量: $330.13M | 市值排名: #50\n- 走势判断: 📈 看涨 | 波动剧烈\n\n5. $BTC (Bitcoin)\n- 当前价格: $70,771 | 24h涨跌: +4.63%\n- 24h成交量: $53.35B | 市值排名: #1\n- 走势判断: 📈 看涨 | 小幅震荡",
-  "full": "📰 加密货币日报 · 2026-03-10\n━━━━━━━━━━━━━━\n【资讯速递】\n1. SharpLink博彩股票报告与ETH Holdings相关的$ 7.34亿美元亏损\n2. 电动空中出租车制造商Archer在反诉中回击Joby ，指控隐瞒中国关系\n3. “飞行汽车”将于今年夏天在美国的天空中起飞\n4. 银行需要清晰度不仅仅是加密–前CFTC主席解释原因\n\n【技术面分析 - 24h热门波动币】\n\n1. $HYPE (Hyperliquid)\n- 当前价格: $34.86 | 24h涨跌: +12.32%\n- 24h成交量: $536.87M | 市值排名: #16\n- 走势判断: 📈 看涨 | 波动剧烈\n\n2. $ZEC (Zcash)\n- 当前价格: $221.11 | 24h涨跌: +7.65%\n- 24h成交量: $319.26M | 市值排名: #30\n- 走势判断: 📈 看涨 | 波动剧烈\n\n3. $SUI (Sui)\n- 当前价格: $0.966 | 24h涨跌: +6.95%\n- 24h成交量: $698.19M | 市值排名: #29\n- 走势判断: 📈 看涨 | 波动剧烈\n\n4. $AAVE (Aave)\n- 当前价格: $112.08 | 24h涨跌: +5.28%\n- 24h成交量: $330.13M | 市值排名: #50\n- 走势判断: 📈 看涨 | 波动剧烈\n\n5. $BTC (Bitcoin)\n- 当前价格: $70,771 | 24h涨跌: +4.63%\n- 24h成交量: $53.35B | 市值排名: #1\n- 走势判断: 📈 看涨 | 小幅震荡\n━━━━━━━━━━━━━━\n回复「确认发送」→ 发布到币安",
-  "timestamp": "2026-03-10T09:08:14.457Z",
+  "part1": "【资讯速递】\n1. 英国政府长期欺诈策略将加密标记为不断增长的风险\n2. 专家分享XRP完全清除以太坊作为领导者的一个方面\n3. 比特币价格预测： 95%的比特币现已被挖掘—接下来会发生什么？\n4. Elon Musk的X Money应用程序即将公开发布，没有Dogecoin的迹象\n5. 主要风投支持Zcash开发商在ECC拆分后获得2500万美元$",
+  "part2": "1. $FLOW (Flow)\n- 当前价格: $0.0694 | 24h涨跌: +38.10%\n- 24h成交量: $195.70M | 市值排名: #244\n- 走势判断: 📈 看涨 | 强势拉升，短线情绪偏热\n\n2. $SHIB (Shiba Inu)\n- 当前价格: $0.0000 | 24h涨跌: +9.16%\n- 24h成交量: $219.03M | 市值排名: #31\n- 走势判断: 📈 看涨 | 强势拉升，短线情绪偏热\n\n3. $DOGE (Dogecoin)\n- 当前价格: $0.0982 | 24h涨跌: +7.75%\n- 24h成交量: $1.98B | 市值排名: #10\n- 走势判断: 📈 看涨 | 延续反弹，资金回流明显\n\n4. $AAVE (Aave)\n- 当前价格: $113.80 | 24h涨跌: +7.74%\n- 24h成交量: $341.93M | 市值排名: #49\n- 走势判断: 📈 看涨 | 延续反弹，资金回流明显\n\n5. $AVAX (Avalanche)\n- 当前价格: $9.85 | 24h涨跌: +6.38%\n- 24h成交量: $385.06M | 市值排名: #24\n- 走势判断: 📈 看涨 | 延续反弹，资金回流明显",
+  "full": "📰 加密货币日报 · 2026-03-10\n━━━━━━━━━━━━━━\n【资讯速递】\n1. 英国政府长期欺诈策略将加密标记为不断增长的风险\n2. 专家分享XRP完全清除以太坊作为领导者的一个方面\n3. 比特币价格预测： 95%的比特币现已被挖掘—接下来会发生什么？\n4. Elon Musk的X Money应用程序即将公开发布，没有Dogecoin的迹象\n5. 主要风投支持Zcash开发商在ECC拆分后获得2500万美元$\n\n【技术面分析 - 24h热门波动币】\n\n1. $FLOW (Flow)\n- 当前价格: $0.0694 | 24h涨跌: +38.10%\n- 24h成交量: $195.70M | 市值排名: #244\n- 走势判断: 📈 看涨 | 强势拉升，短线情绪偏热\n\n2. $SHIB (Shiba Inu)\n- 当前价格: $0.0000 | 24h涨跌: +9.16%\n- 24h成交量: $219.03M | 市值排名: #31\n- 走势判断: 📈 看涨 | 强势拉升，短线情绪偏热\n\n3. $DOGE (Dogecoin)\n- 当前价格: $0.0982 | 24h涨跌: +7.75%\n- 24h成交量: $1.98B | 市值排名: #10\n- 走势判断: 📈 看涨 | 延续反弹，资金回流明显\n\n4. $AAVE (Aave)\n- 当前价格: $113.80 | 24h涨跌: +7.74%\n- 24h成交量: $341.93M | 市值排名: #49\n- 走势判断: 📈 看涨 | 延续反弹，资金回流明显\n\n5. $AVAX (Avalanche)\n- 当前价格: $9.85 | 24h涨跌: +6.38%\n- 24h成交量: $385.06M | 市值排名: #24\n- 走势判断: 📈 看涨 | 延续反弹，资金回流明显\n\n━━━━━━━━━━━━━━\n你更关注哪个币的短线机会？欢迎留言讨论。\n\n回复「确认发送」→ 发布到币安",
+  "timestamp": "2026-03-10T17:50:52.217Z",
   "coins": [
     {
-      "symbol": "HYPE",
-      "name": "Hyperliquid",
-      "price": 34.86,
-      "change24h": 12.31773,
-      "volume": 536872153,
-      "marketCap": 8309529761,
-      "rank": 16
+      "symbol": "FLOW",
+      "name": "Flow",
+      "price": 0.069359,
+      "change24h": 38.10048,
+      "volume": 195696304,
+      "marketCap": 114660317,
+      "rank": 244
     },
     {
-      "symbol": "ZEC",
-      "name": "Zcash",
-      "price": 221.11,
-      "change24h": 7.6539,
-      "volume": 319256793,
-      "marketCap": 3667444828,
-      "rank": 30
+      "symbol": "SHIB",
+      "name": "Shiba Inu",
+      "price": 0.00000593,
+      "change24h": 9.1594,
+      "volume": 219026537,
+      "marketCap": 3492272851,
+      "rank": 31
     },
     {
-      "symbol": "SUI",
-      "name": "Sui",
-      "price": 0.965649,
-      "change24h": 6.95035,
-      "volume": 698188835,
-      "marketCap": 3765439252,
-      "rank": 29
+      "symbol": "DOGE",
+      "name": "Dogecoin",
+      "price": 0.098238,
+      "change24h": 7.7492,
+      "volume": 1982212888,
+      "marketCap": 15063105870,
+      "rank": 10
     },
     {
       "symbol": "AAVE",
       "name": "Aave",
-      "price": 112.08,
-      "change24h": 5.27667,
-      "volume": 330126357,
-      "marketCap": 1700872608,
-      "rank": 50
+      "price": 113.8,
+      "change24h": 7.73652,
+      "volume": 341930081,
+      "marketCap": 1728422392,
+      "rank": 49
     },
     {
-      "symbol": "BTC",
-      "name": "Bitcoin",
-      "price": 70771,
-      "change24h": 4.62875,
-      "volume": 53354608252,
-      "marketCap": 1415174348187,
-      "rank": 1
+      "symbol": "AVAX",
+      "name": "Avalanche",
+      "price": 9.85,
+      "change24h": 6.38296,
+      "volume": 385059654,
+      "marketCap": 4255193912,
+      "rank": 24
     }
-  ]
+  ],
+  "news": [
+    {
+      "original": "UK governments long-term fraud strategy labels crypto as growing risk",
+      "translated": "英国政府长期欺诈策略将加密标记为不断增长的风险",
+      "pubDate": "Tue, 10 Mar 2026 17:07:39 +0000",
+      "category": "Latest News"
+    },
+    {
+      "original": "Pundit Shares The One Aspect That XRP Completely Clears Ethereum As The Leader",
+      "translated": "专家分享XRP完全清除以太坊作为领导者的一个方面",
+      "pubDate": "Tue, 10 Mar 2026 17:00:01 +0000",
+      "category": "XRP"
+    },
+    {
+      "original": "Bitcoin Price Prediction: 95% of All Bitcoin Has Now Been Mined — What Happens Next?",
+      "translated": "比特币价格预测： 95%的比特币现已被挖掘—接下来会发生什么？",
+      "pubDate": "Tue, 10 Mar 2026 16:31:08 +0000",
+      "category": "Industry Talk"
+    },
+    {
+      "original": "Elon Musk&#39;s X Money App Nears Public Launch, No Sign of Dogecoin",
+      "translated": "Elon Musk的X Money应用程序即将公开发布，没有Dogecoin的迹象",
+      "pubDate": "Tue, 10 Mar 2026 16:20:07 +0000",
+      "category": "dogecoin"
+    },
+    {
+      "original": "Major VCs Back Zcash Developers With $25 Million After ECC Split",
+      "translated": "主要风投支持Zcash开发商在ECC拆分后获得2500万美元$",
+      "pubDate": "Tue, 10 Mar 2026 16:00:40 +0000",
+      "category": "Crypto News"
+    }
+  ],
+  "metadata": {
+    "mode": "crypto-only",
+    "newsCount": 5,
+    "coinCount": 5,
+    "interactionLine": "你更关注哪个币的短线机会？欢迎留言讨论。"
+  }
 }

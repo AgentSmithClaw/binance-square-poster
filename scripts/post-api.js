@@ -101,6 +101,84 @@ function buildPayload(content) {
 }
 
 /**
+ * 校验内容质量（2026-03-10新增）
+ * 最低可发布标准：
+ * - 有标题（含日期）
+ * - 有【资讯速递】且至少 3 条
+ * - 有【技术面分析】且至少 3 个币
+ * - 有完整结构
+ * - 不像占位文案/测试样例
+ */
+function validateContentQuality(content) {
+  console.log('\n========== 内容质量校验 ==========');
+  
+  const issues = [];
+  
+  // 检查1: 有标题（含日期）
+  if (!content.includes('📰') && !content.includes('日报') && !content.includes('Daily')) {
+    issues.push('❌ 缺少标题');
+  } else {
+    console.log('✅ 有标题');
+  }
+  
+  // 检查2: 有【资讯速递】且至少 3 条
+  const newsMatch = content.match(/【资讯速递】/);
+  const techHeaderRegex = /【技术面分析(?:\s*-\s*24h热门波动币)?】/;
+  if (!newsMatch) {
+    issues.push('❌ 缺少【资讯速递】板块');
+  } else {
+    // 检查资讯数量
+    const newsSection = content.split(techHeaderRegex)[0] || content;
+    const newsCount = (newsSection.match(/^\d+\./gm) || []).length;
+    if (newsCount < 3) {
+      issues.push(`❌ 资讯速递只有 ${newsCount} 条，少于 3 条`);
+    } else {
+      console.log(`✅ 资讯速递有 ${newsCount} 条`);
+    }
+  }
+  
+  // 检查3: 有【技术面分析】且至少 3 个币
+  const techMatch = content.match(techHeaderRegex);
+  if (!techMatch) {
+    issues.push('❌ 缺少【技术面分析】板块');
+  } else {
+    const techSection = content.split(techHeaderRegex)[1] || '';
+    const coinCount = (techSection.match(/\$[A-Z]+/g) || []).length;
+    if (coinCount < 3) {
+      issues.push(`❌ 技术面分析只有 ${coinCount} 个币，少于 3 个`);
+    } else {
+      console.log(`✅ 技术面分析有 ${coinCount} 个币`);
+    }
+  }
+  
+  // 检查4: 有完整结构（不是简单涨跌幅拼接）
+  const hasStructure = content.includes('━━━━') || content.includes('---') || content.includes('\n\n');
+  if (!hasStructure && content.length < 100) {
+    issues.push('❌ 内容过短，不像完整帖子');
+  } else {
+    console.log('✅ 有完整结构');
+  }
+  
+  // 检查5: 不像占位文案/测试样例
+  const isPlaceholder = /^(测试|test|TEST|HELLO|Minimal)[\s\d]*$/i.test(content.trim());
+  if (isPlaceholder) {
+    issues.push('❌ 内容像测试样例/占位文案');
+  } else {
+    console.log('✅ 不像占位文案');
+  }
+  
+  // 输出结果
+  if (issues.length > 0) {
+    console.log('\n⚠️ 内容质量检查未通过:');
+    issues.forEach(i => console.log(i));
+    throw new Error('❌ 内容质量不达标，已拒绝发布。请生成温和改写版后重新审核。');
+  }
+  
+  console.log('✅ 内容质量检查通过');
+  return true;
+}
+
+/**
  * 发送请求
  */
 async function postToBinanceAPI(payload) {
@@ -198,7 +276,10 @@ async function main() {
     // 2. 构造 payload
     const payload = buildPayload(ARTICLE_CONTENT);
     
-    // 3. 发送请求
+    // 3. 内容质量检查（2026-03-10新增）
+    validateContentQuality(ARTICLE_CONTENT);
+    
+    // 4. 发送请求
     console.log('\n========== 发送请求 ==========');
     const result = await postToBinanceAPI(payload);
     
