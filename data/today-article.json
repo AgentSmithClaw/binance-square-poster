@@ -1,52 +1,53 @@
 {
-  "part1": "【资讯速递】\n\n1. Samson Mow Calls Bitcoin ‘Exponential Gold’, Predicts What Will Happen\n\n2. 佛罗里达州议员推进首个州级稳定币监管法案\n\n3. 后量子时代转移可能迫使加密交易所重新考虑钱包安全\n\n4. Ring&#8217;s Jamie Siminoff has been trying to calm privacy fears since the Super Bowl, but his answers may not help\n\n5. Kalshi和Polymarket讨论200亿美元估值融资",
-  "part2": "1. $AVAX (Avalanche)\n   当前价格: $9.23 | 24h涨跌: +4.21%\n   24h成交量: $255.98M | 市值排名: #28\n   走势判断: 📈 看涨 | 小幅震荡\n\n2. $SUI (Sui)\n   当前价格: $0.916 | 24h涨跌: +3.39%\n   24h成交量: $401.00M | 市值排名: #29\n   走势判断: 📈 看涨 | 小幅震荡\n\n3. $PEPE (Pepe)\n   当前价格: $0 | 24h涨跌: +3.35%\n   24h成交量: $283.54M | 市值排名: #55\n   走势判断: 📈 看涨 | 小幅震荡\n\n4. $ETH (Ethereum)\n   当前价格: $2,006.01 | 24h涨跌: +2.92%\n   24h成交量: $19.81B | 市值排名: #2\n   走势判断: 📈 看涨 | 小幅震荡\n\n5. $LINK (Chainlink)\n   当前价格: $8.82 | 24h涨跌: +2.49%\n   24h成交量: $328.18M | 市值排名: #18\n   走势判断: 📈 看涨 | 小幅震荡",
-  "timestamp": "2026-03-09T06:14:02.086Z",
+  "part1": "【资讯速递】\n1. SharpLink博彩股票报告与ETH Holdings相关的$ 7.34亿美元亏损\n2. 随着短期持有者意识到损失低于$ 70K ，比特币供应压力增加\n3. 电动空中出租车制造商Archer在反诉中回击Joby ，指控隐瞒中国关系\n4. “飞行汽车”将于今年夏天在美国的天空中起飞\n5. Bithumb因AML、KYC违规行为在韩国面临6个月停职",
+  "part2": "1. $HYPE (Hyperliquid)\n- 当前价格: $34.99 | 24h涨跌: +13.49%\n- 24h成交量: $534.73M | 市值排名: #16\n- 走势判断: 📈 看涨 | 波动剧烈\n\n2. $ZEC (Zcash)\n- 当前价格: $220.94 | 24h涨跌: +7.32%\n- 24h成交量: $316.48M | 市值排名: #30\n- 走势判断: 📈 看涨 | 波动剧烈\n\n3. $SUI (Sui)\n- 当前价格: $0.961 | 24h涨跌: +6.05%\n- 24h成交量: $693.31M | 市值排名: #29\n- 走势判断: 📈 看涨 | 波动剧烈\n\n4. $BTC (Bitcoin)\n- 当前价格: $70,981 | 24h涨跌: +4.84%\n- 24h成交量: $53.47B | 市值排名: #1\n- 走势判断: 📈 看涨 | 小幅震荡\n\n5. $AAVE (Aave)\n- 当前价格: $112.04 | 24h涨跌: +4.67%\n- 24h成交量: $330.18M | 市值排名: #50\n- 走势判断: 📈 看涨 | 小幅震荡",
+  "full": "📰 加密货币日报 · 2026-03-10\n━━━━━━━━━━━━━━\n【资讯速递】\n1. SharpLink博彩股票报告与ETH Holdings相关的$ 7.34亿美元亏损\n2. 随着短期持有者意识到损失低于$ 70K ，比特币供应压力增加\n3. 电动空中出租车制造商Archer在反诉中回击Joby ，指控隐瞒中国关系\n4. “飞行汽车”将于今年夏天在美国的天空中起飞\n5. Bithumb因AML、KYC违规行为在韩国面临6个月停职\n\n【技术面分析 - 24h热门波动币】\n\n1. $HYPE (Hyperliquid)\n- 当前价格: $34.99 | 24h涨跌: +13.49%\n- 24h成交量: $534.73M | 市值排名: #16\n- 走势判断: 📈 看涨 | 波动剧烈\n\n2. $ZEC (Zcash)\n- 当前价格: $220.94 | 24h涨跌: +7.32%\n- 24h成交量: $316.48M | 市值排名: #30\n- 走势判断: 📈 看涨 | 波动剧烈\n\n3. $SUI (Sui)\n- 当前价格: $0.961 | 24h涨跌: +6.05%\n- 24h成交量: $693.31M | 市值排名: #29\n- 走势判断: 📈 看涨 | 波动剧烈\n\n4. $BTC (Bitcoin)\n- 当前价格: $70,981 | 24h涨跌: +4.84%\n- 24h成交量: $53.47B | 市值排名: #1\n- 走势判断: 📈 看涨 | 小幅震荡\n\n5. $AAVE (Aave)\n- 当前价格: $112.04 | 24h涨跌: +4.67%\n- 24h成交量: $330.18M | 市值排名: #50\n- 走势判断: 📈 看涨 | 小幅震荡\n━━━━━━━━━━━━━━\n回复「确认发送」→ 发布到币安",
+  "timestamp": "2026-03-10T08:37:05.760Z",
   "coins": [
     {
-      "symbol": "AVAX",
-      "name": "Avalanche",
-      "price": 9.23,
-      "change24h": 4.20846,
-      "volume": 255978117,
-      "marketCap": 3987002126,
-      "rank": 28
+      "symbol": "HYPE",
+      "name": "Hyperliquid",
+      "price": 34.99,
+      "change24h": 13.4865,
+      "volume": 534734816,
+      "marketCap": 8341025378,
+      "rank": 16
+    },
+    {
+      "symbol": "ZEC",
+      "name": "Zcash",
+      "price": 220.94,
+      "change24h": 7.31978,
+      "volume": 316484898,
+      "marketCap": 3666159114,
+      "rank": 30
     },
     {
       "symbol": "SUI",
       "name": "Sui",
-      "price": 0.916271,
-      "change24h": 3.39025,
-      "volume": 400996599,
-      "marketCap": 3572343302,
+      "price": 0.96117,
+      "change24h": 6.04813,
+      "volume": 693305145,
+      "marketCap": 3744768249,
       "rank": 29
     },
     {
-      "symbol": "PEPE",
-      "name": "Pepe",
-      "price": 0.0000033,
-      "change24h": 3.34808,
-      "volume": 283543586,
-      "marketCap": 1390410994,
-      "rank": 55
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "price": 70981,
+      "change24h": 4.8361,
+      "volume": 53469209864,
+      "marketCap": 1418513678183,
+      "rank": 1
     },
     {
-      "symbol": "ETH",
-      "name": "Ethereum",
-      "price": 2006.01,
-      "change24h": 2.91758,
-      "volume": 19806728109,
-      "marketCap": 242106903354,
-      "rank": 2
-    },
-    {
-      "symbol": "LINK",
-      "name": "Chainlink",
-      "price": 8.82,
-      "change24h": 2.48521,
-      "volume": 328176865,
-      "marketCap": 6248989066,
-      "rank": 18
+      "symbol": "AAVE",
+      "name": "Aave",
+      "price": 112.04,
+      "change24h": 4.66604,
+      "volume": 330181211,
+      "marketCap": 1700811810,
+      "rank": 50
     }
   ]
 }
