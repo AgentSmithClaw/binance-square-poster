@@ -23,6 +23,8 @@
 
 - 📡 **多源资讯抓取** - 自动采集加密货币、科技、AI 热点资讯
 - 📝 **智能文章生成** - 资讯速递 + 技术面分析，自动生成可读性强的内容
+- 🧱 **固定模板生成** - 内置 `5条资讯 + 5个技术面 + 总结 + 互动引导` 的日报模板
+- 🛡️ **字段与格式门禁** - 校验 `$` 前缀、去重、字段完整性、去来源、占位词拦截
 - 🤖 **OpenClaw 集成** - 作为 Skill 运行，可通过对话指令触发
 - ✅ **审核机制** - 发布前需人工确认，支持"确认发送"指令
 - 📊 **状态管理** - 自动追踪待发送草稿、发送状态
@@ -49,8 +51,11 @@ binance-square-poster/
 ├── scripts/
 │   ├── fetch-news.js          # 资讯抓取脚本
 │   ├── generate-article.js    # 文章生成脚本
+│   ├── build-daily-report.js  # 固定模板构建
+│   ├── validate-daily-report.js # 字段/格式校验
+│   ├── prepare-daily-post.js  # 生成 + 校验一体化
 │   ├── post-api.js            # API 发布脚本
-│   ├── confirm-send.js       # 确认发送逻辑
+│   ├── confirm-send.js        # 确认发送逻辑
 │   └── state-manager.js       # 状态管理
 └── state/
     └── pending-posts.json     # 发送状态记录
