@@ -26,15 +26,24 @@ async function main() {
   
   console.log('✅ 找到待发送草稿，正文长度:', pending.postContent.length);
   
-  // 2. 调用 post-api.js 发送
+  // 2. 先把内容写入 today-article.json（修复：确保 post-api.js 读取正确内容）
   const postContent = pending.postContent;
+  const dataDir = path.join(__dirname, '..', 'data');
+  const articleFile = path.join(dataDir, 'today-article.json');
+  const articleData = {
+    full: postContent + '\n回复「确认发送」→ 发布到币安',
+    createdAt: Date.now()
+  };
+  fs.writeFileSync(articleFile, JSON.stringify(articleData, null, 2));
+  console.log('✅ 已写入 today-article.json');
   
+  // 3. 调用 post-api.js 发送
   console.log('🚀 正在发送到 Binance Square...');
   
   return new Promise((resolve, reject) => {
     const apiScript = path.join(__dirname, 'post-api.js');
     const child = spawn('node', [apiScript], {
-      env: { ...process.env, POST_CONTENT: postContent },
+      env: { ...process.env },
       stdio: ['pipe', 'pipe', 'pipe']
     });
     
@@ -49,7 +58,7 @@ async function main() {
         console.log('✅ 发布成功');
         console.log(stdout);
         
-        // 3. 清空状态，设为 sent
+        // 4. 清空状态，设为 sent
         stateManager.updateStatus(GROUP_ID, THREAD_ID, 'sent');
         stateManager.clearPendingPost(GROUP_ID, THREAD_ID);
         console.log('✅ 状态已更新: sent');
