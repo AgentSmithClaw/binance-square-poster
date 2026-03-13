@@ -1,170 +1,96 @@
 ---
 name: binance-square-poster
-description: Generate Binance Square crypto posts, scrape Binance Square hot posts, create viral-style hot-post templates, produce multi-version coin copy, and manage scheduled publishing workflows. Use this skill when the user wants to collect crypto news, turn Binance Square trends into draft posts, generate templated high-engagement variants, configure timed runs, or publish content to Binance Square.
+description: Generate Binance Square crypto drafts, scrape Binance Square hot posts, create viral-style template drafts, produce multi-style coin copy, manage scheduled posting workflows, and preview selected drafts for publishing. Use this skill when the user wants to turn crypto news or Binance Square trends into post drafts, configure timed runs, select a draft for publishing, or preview/post to Binance Square.
 ---
 
 # Binance Square Poster
 
-This skill is for four related jobs:
+Use this skill for Binance Square content workflows that combine news collection, hot-post scraping, copy generation, scheduling, and publish preview.
 
-1. Generate a daily Binance Square draft from crypto news and market data.
-2. Scrape hot posts from Binance Square and turn them into a new hot-post draft.
-3. Generate viral-style post templates based on current hot-post structure.
-4. Generate multiple post variants for each hot coin symbol.
+## Use This Skill When
 
-## When To Use
+The user wants to:
 
-Use this skill when the user asks to:
+- generate a Binance Square daily draft from crypto news
+- scrape Binance Square hot posts into structured data
+- generate a main hot-post draft from current Square trends
+- create viral-style structure templates without copying source posts verbatim
+- generate multiple coin-specific variants for hot symbols
+- choose a generated draft and move it into publish-preview flow
+- set, inspect, enable, or run a posting schedule
 
-- generate or publish a Binance Square post
-- collect crypto news and build a daily post draft
-- find hot posts on Binance Square
-- scrape Binance Square content into structured data
-- generate a post based on current Binance Square hot topics
-- imitate high-performing post structure without copying raw text
-- generate multiple variants for BTC, ETH, SOL, or other hot symbols
-- set, view, or change timed tasks for the posting workflow
+## Core Entry Points
 
-## Core Files
+- `node index.js --full`
+  Daily crypto draft pipeline
+- `node index.js --fetch-hot`
+  Scrape Binance Square hot posts into `data/hot-posts.json`
+- `node index.js --generate-hot`
+  Generate `primaryPost`, `viralTemplates`, and `coinVariants`
+- `node index.js --hot-full`
+  Run hot-post scraping and generation in one pass
+- `node index.js --list-hot-drafts`
+  List selectable generated drafts
+- `node index.js --select-hot-primary`
+  Select the main generated hot-post draft
+- `node index.js --select-hot-template contrarian-alert`
+  Select a template draft
+- `node index.js --select-hot-variant BTC aggressive`
+  Select a symbol/style draft
+- `node index.js --post`
+  Open publish preview using the latest selected draft if available
 
-- `index.js`: unified entry point
-- `scripts/fetch-news.js`: pull RSS news sources
-- `scripts/generate-article.js`: create the daily crypto draft
-- `scripts/fetch-square-hot.js`: scrape Binance Square hot-post cards with Playwright
-- `scripts/generate-hot-post.js`: generate a main hot-post draft, viral templates, and symbol variants
-- `scripts/schedule-manager.js`: set schedule, timezone, pipeline, and auto-post mode
-- `scripts/scheduler.js`: long-running scheduler that executes jobs at configured times
-- `scripts/post-to-binance.js`: publish a generated draft
+## Main Files
+
+- `index.js`: unified CLI entry
+- `scripts/fetch-news.js`: news collection
+- `scripts/generate-summary.js`: summary generation
+- `scripts/generate-article.js`: daily draft generation
+- `scripts/fetch-square-hot.js`: Playwright-based Square scraping and scoring
+- `scripts/generate-hot-post.js`: main draft, template, and coin variant generation
+- `scripts/select-hot-draft.js`: move a selected generated draft into pending state
+- `scripts/post-to-binance.js`: publish preview flow
+- `scripts/schedule-manager.js`: schedule configuration
+- `scripts/scheduler.js`: long-running scheduler
+- `scripts/state-manager.js`: pending draft state and status tracking
 - `config/config.json`: runtime configuration
 
-## Fast Paths
+## Output Shape
 
-### Daily crypto draft
+Hot-post generation writes `data/generated-hot-post.json` with:
 
-```bash
-node index.js --full
-```
-
-### Hot-post scrape plus template generation
-
-```bash
-node index.js --hot-full
-```
-
-This writes:
-
-- `data/hot-posts.json`
-- `data/generated-hot-post.json`
-
-The generated output includes:
-
-- `primaryPost`: the main summary draft
-- `viralTemplates`: reusable high-engagement structure templates
-- `coinVariants`: multiple versions for each hot coin symbol
-
-### Only regenerate templates and coin variants
-
-```bash
-node index.js --generate-hot
-node index.js --generate-templates
-node index.js --generate-variants
-```
-
-All three commands currently run the same generator so the output stays synchronized.
-
-## Viral-Style Templates
-
-The generator creates template-style drafts based on the current hot-post signal mix, not by copying source posts.
+- `primaryPost`: summary-style main draft
+- `viralTemplates`: structure-driven reusable drafts
+- `coinVariants`: symbol groups with style variants
 
 Current template families:
 
-- contrarian alert
-- checklist breakdown
-- momentum question
+- `contrarian-alert`
+- `checklist-breakdown`
+- `momentum-question`
 
-These are designed to mimic strong Binance Square post structure:
+Current style variants:
 
-- fast hook
-- specific symbol focus
-- clear opinion
-- risk reminder
-- comment-driving ending
+- `steady`
+- `aggressive`
+- `debate`
+- `educational`
 
-## Coin Variant Workflow
+## Scheduling Commands
 
-When the user wants copy for specific coins:
+- `node index.js --schedule-show`
+- `node index.js --schedule-set 09:00,12:00,20:30`
+- `node index.js --schedule-timezone Asia/Shanghai`
+- `node index.js --schedule-pipeline daily-report|hot-post|mixed`
+- `node index.js --scheduler-enable`
+- `node index.js --scheduler-disable`
+- `node index.js --scheduler`
 
-1. Scrape hot posts with `node index.js --fetch-hot`.
-2. Generate outputs with `node index.js --generate-hot`.
-3. Read `coinVariants` from `data/generated-hot-post.json`.
-4. Pick the best symbol and style for publishing.
+## Working Rules
 
-Variant styles currently included:
-
-- short-punchy
-- analysis-driven
-- engagement-question
-
-## Schedule Management
-
-### View current schedule
-
-```bash
-node index.js --schedule-show
-```
-
-### Set schedule times
-
-```bash
-node index.js --schedule-set 09:00,12:00,20:30
-```
-
-### Set timezone
-
-```bash
-node index.js --schedule-timezone Asia/Shanghai
-```
-
-### Choose pipeline
-
-```bash
-node index.js --schedule-pipeline daily-report
-node index.js --schedule-pipeline hot-post
-node index.js --schedule-pipeline mixed
-```
-
-### Start scheduler process
-
-```bash
-node index.js --scheduler
-```
-
-## Config Notes
-
-Read `config/config.json` only when runtime behavior must be changed.
-
-Relevant hot-post generation fields:
-
-```json
-{
-  "square": {
-    "hotFeed": {
-      "maxPosts": 8,
-      "scrollRounds": 3
-    },
-    "hotGeneration": {
-      "variantCountPerCoin": 3,
-      "coinLimit": 3,
-      "templateStyle": "viral-cn"
-    }
-  }
-}
-```
-
-## Guardrails
-
-- Never expose the full Binance API key in output.
-- Prefer `reviewBeforePost=true` unless the user explicitly wants auto-posting.
-- Treat scraped hot-post rankings as heuristic signals, not official engagement numbers.
-- Use hot posts for structure and topic signals, not for verbatim copying.
-- If scraping fails, report whether the blocker is login state, Playwright, or page-structure drift.
+- Use scraped hot posts as signal sources for topic, structure, and sentiment, not as text to copy.
+- Prefer generated draft selection before publish preview so the latest chosen content is explicit.
+- Treat hot-post rankings and quality scores as heuristics.
+- If publish preview fails, distinguish between invalid login state, Playwright issues, and Binance page-structure changes.
+- Do not expose API keys, cookies, or saved login state in output.
+- Keep `reviewBeforePost` enabled unless the user explicitly asks for full automation.
