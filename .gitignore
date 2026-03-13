@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# API Keys & Secrets - 重要！
+config.json
+*.local.json
+.env
+.env.*
+
+# Credentials
+credentials.json
+*.pem
+*.key
+
+# Data files (optional - can keep structure)
+# data/latest-news.json
+# data/today-article.json
+# data/pending-post.txt
+# data/today-summary.json
+# data/binance-state.json
+
+# Keep these to preserve directory structure
+!data/.gitkeep
+state/
+
+# Generated local outputs
+/data/*.png
+/data/*.html
+/data/*.txt
+/data/*.json
+!/data/.gitkeep

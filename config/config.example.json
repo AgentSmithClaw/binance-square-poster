@@ -1,0 +1,47 @@
+{
+  "sources": [
+    {"name": "Cryptonews", "url": "https://cryptonews.com/news/feed/", "enabled": true, "category": "crypto"},
+    {"name": "CoinTelegraph", "url": "https://cointelegraph.com/rss", "enabled": true, "category": "crypto"},
+    {"name": "BitCoinist", "url": "https://bitcoinist.com/feed/", "enabled": true, "category": "crypto"},
+    {"name": "Decrypt", "url": "https://decrypt.co/feed", "enabled": true, "category": "crypto"},
+    {"name": "TechCrunch", "url": "https://techcrunch.com/feed/", "enabled": true, "category": "tech"},
+    {"name": "Wired", "url": "https://www.wired.com/feed/rss", "enabled": true, "category": "tech"},
+    {"name": "HackerNews", "url": "https://hnrss.org/frontpage", "enabled": true, "category": "tech"}
+  ],
+  "publish": {
+    "platform": "binance-square",
+    "apiKey": "YOUR_BINANCE_SQUARE_API_KEY",
+    "minNews": 5,
+    "reviewBeforePost": true,
+    "schedule": ["09:00", "12:00", "15:00", "18:00", "20:00", "23:00"],
+    "timezone": "Asia/Shanghai",
+    "scheduler": {
+      "enabled": false,
+      "pipeline": "daily-report",
+      "autoPost": false,
+      "runOnStart": false,
+      "pollIntervalSeconds": 30
+    }
+  },
+  "square": {
+    "hotFeed": {
+      "enabled": true,
+      "url": "https://www.binance.com/zh-CN/square",
+      "maxCards": 20,
+      "maxPosts": 8,
+      "scrollRounds": 3,
+      "headless": true,
+      "useSavedLoginState": true
+    },
+    "hotGeneration": {
+      "coinLimit": 3,
+      "templateStyle": "viral-cn",
+      "styles": ["steady", "aggressive", "debate", "educational"]
+    },
+    "symbolPool": {
+      "mode": "allowlist",
+      "allowlist": ["BTC", "ETH", "SOL", "BNB", "XRP", "DOGE", "ADA", "DOT", "LTC", "PEPE", "NTRN"],
+      "denylist": ["QC", "FLOWUSDT", "BTCUSDT", "ETHUSDT"]
+    }
+  }
+}
