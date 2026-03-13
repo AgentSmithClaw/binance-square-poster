@@ -1,174 +1,258 @@
-# 🚀 binance-square-poster
+# Binance Square Poster
 
-<div align="center">
+一个面向 Binance Square 的内容自动化项目，支持从加密资讯生成日报、抓取 Binance Square 热门帖子、生成仿爆款结构模板、按币种产出多风格文案，并通过定时任务驱动整条内容流水线。
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-orange.svg)](https://github.com/openclaw/openclaw)
+## 当前能力
 
-**OpenClaw 平台的 Binance Square 自动发帖 Skill**
+- 抓取多源加密资讯并生成日报草稿
+- 从 Binance Square 抓取热门帖子并提炼热点
+- 生成主帖成稿、仿爆款模板、按币种多版本文案
+- 支持 `steady`、`aggressive`、`debate`、`educational` 四种文案风格
+- 支持草稿选择、待发布状态管理、发布预览
+- 支持配置定时任务，自动执行日报或热帖流水线
 
-</div>
+## 项目结构
 
----
-
-## 📖 项目简介
-
-`binance-square-poster` 是一个运行在 [OpenClaw](https://github.com/openclaw/openclaw) 平台上的 **Agent Skill**，用于自动化采集加密货币资讯并发布到 Binance Square（币安广场）。
-
-> ⚠️ **注意**：本项目不是一个独立的 SaaS 平台或后端服务，而是一个 **OpenClaw 技能（Skill）**，需要配合 OpenClaw 框架使用。
-
----
-
-## ✨ 功能特性
-
-- 📡 **多源资讯抓取** - 自动采集加密货币、科技、AI 热点资讯
-- 📝 **智能文章生成** - 资讯速递 + 技术面分析，自动生成可读性强的内容
-- 🤖 **OpenClaw 集成** - 作为 Skill 运行，可通过对话指令触发
-- ✅ **审核机制** - 发布前需人工确认，支持"确认发送"指令
-- 📊 **状态管理** - 自动追踪待发送草稿、发送状态
-- 🔄 **Payload 兼容** - 自动适配 Binance Square OpenAPI 最新格式
-
----
-
-## 📁 目录结构
-
-```
+```text
 binance-square-poster/
-├── SKILL.md                   # Skill 核心规则（资讯速递、技术面分析、锁定逻辑）
-├── CHECKLIST.md               # 发布前检查清单
-├── NOTES.md                   # 开发笔记
-├── README.md                  # 本文档
-├── index.js                   # Skill 入口文件
-├── config/
-│   ├── config.example.json    # 配置示例
-│   └── config.json           # 实际配置（不提交）
-├── data/
-│   ├── latest-news.json       # 最新抓取的资讯
-│   ├── today-article.json     # 今日生成的草稿
-│   └── pending-post.txt       # 待发送的草稿
-├── scripts/
-│   ├── fetch-news.js          # 资讯抓取脚本
-│   ├── generate-article.js    # 文章生成脚本
-│   ├── post-api.js            # API 发布脚本
-│   ├── confirm-send.js       # 确认发送逻辑
-│   └── state-manager.js       # 状态管理
-└── state/
-    └── pending-posts.json     # 发送状态记录
+|- SKILL.md
+|- README.md
+|- CHECKLIST.md
+|- NOTES.md
+|- index.js
+|- config/
+|  |- config.example.json
+|  |- config.json
+|- data/
+|  |- .gitkeep
+|- scripts/
+|  |- fetch-news.js
+|  |- generate-summary.js
+|  |- generate-article.js
+|  |- fetch-square-hot.js
+|  |- generate-hot-post.js
+|  |- select-hot-draft.js
+|  |- post-to-binance.js
+|  |- schedule-manager.js
+|  |- scheduler.js
+|  |- state-manager.js
+|- state/
 ```
 
----
+## 环境要求
 
-## 🛠️ 依赖环境
+- Node.js 18+
+- npm
+- Playwright
+- 可用的 Binance 登录态，用于抓取或发布预览
 
-| 依赖 | 说明 |
-|------|------|
-| **OpenClaw** | 必须安装并运行在本地或服务器 |
-| **Node.js** | 18+ 版本 |
-| **Binance 登录态** | 浏览器中已登录 Binance 账号 |
-| **Binance Square OpenAPI Key** | 从 [Binance Creator Center](https://www.binance.com/square/creator) 获取 |
-
----
-
-## 🚀 快速开始
-
-### 1. 安装 Skill
-
-将本项目复制到 OpenClaw 的 Skills 目录：
+安装依赖：
 
 ```bash
-# 假设 OpenClaw 安装在 ~/.openclaw
-cp -r binance-square-poster ~/.openclaw/workspace/.agents/skills/
+npm install
+npx playwright install chromium
 ```
 
-### 2. 配置 API Key
+## 快速开始
+
+### 1. 安装并准备配置
 
 ```bash
-cd ~/.openclaw/workspace/.agents/skills/binance-square-poster
 cp config/config.example.json config/config.json
-# 编辑 config.json，填入你的 API Key
 ```
 
-### 3. 在 OpenClaw 中使用
+默认主要配置在 [config/config.example.json](E:/codex/binance-square-poster-main/config/config.example.json)：
 
-通过对话指令触发：
+- `publish.schedule`：定时执行时间
+- `publish.timezone`：时区
+- `publish.scheduler`：调度器开关与执行模式
+- `square.hotFeed`：热帖抓取行为
+- `square.hotGeneration`：热帖生成行为
+- `square.symbolPool`：币种白名单 / 黑名单
 
-| 指令 | 说明 |
-|------|------|
-| `生成加密货币资讯` | 抓取资讯 + 生成草稿 |
-| `资讯速递正确了` | 锁定当前资讯速递 |
-| `生成新草稿` | 沿用锁定资讯 + 刷新技术面 + 生成草稿 |
-| `确认发送` / `发布` | 确认后发送到 Binance Square |
-
----
-
-## 📝 工作流程
-
-```
-1. 用户发送 "生成加密货币资讯"
-        ↓
-2. Skill 自动抓取最新资讯（5条去重）
-        ↓
-3. 获取技术面数据（5个热门币种）
-        ↓
-4. 生成完整草稿（含检查摘要 + 正文 + 发送提示）
-        ↓
-5. 保存到 pendingPost，等待用户审核
-        ↓
-6. 用户审核后发送 "确认发送"
-        ↓
-7. 读取 pendingPost → 调用 Binance API → 返回帖子链接
-```
-
----
-
-## ⚠️ 注意事项
-
-1. **API Key 安全** - `config.json` 已加入 `.gitignore`，不要提交到 GitHub
-2. **发布限制** - Binance Square 每日发帖有上限，请合理安排发布时间
-3. **内容规范** - 发布前请确认内容符合社区规范
-4. **审核机制** - 默认需要人工确认后才发送，不可自动发布
-
----
-
-## 🔧 进阶配置
-
-### 修改定时发布时间
-
-在 OpenClaw 中配置 Cron 任务：
+### 2. 生成日报内容
 
 ```bash
-# 每天 9:00, 12:00, 15:00, 18:20:00, 23:00 自动生成草稿
-0 9,12,15,18,20,23 * * * /path/to/openclaw run crypto-news-automation
+node index.js --fetch
+node index.js --summary
+node index.js --full
 ```
 
-### 自定义资讯来源
+说明：
 
-编辑 `config/config.json` 中的 `sources` 字段：
+- `--fetch` 抓资讯
+- `--summary` 生成摘要
+- `--full` 生成日报草稿
 
-```json
-{
-  "sources": [
-    {"name": "CoinTelegraph", "url": "https://cointelegraph.com/rss", "enabled": true, "category": "crypto"}
-  ]
-}
+### 3. 抓取 Binance Square 热帖
+
+```bash
+node index.js --fetch-hot
 ```
 
----
+输出文件：
 
-## 📄 许可证
+- `data/hot-posts.json`
 
-MIT License - 详见 [LICENSE](LICENSE)
+这个文件里会包含：
 
----
+- 热帖标题或正文片段
+- 提取出的币种
+- 标签与关键词
+- 热度和质量评分
 
-## 🤝 贡献
+### 4. 生成热帖内容
 
-欢迎提交 Issue 和 Pull Request！
+```bash
+node index.js --generate-hot
+```
 
----
+也可以直接跑整条热帖流水线：
 
-<div align="center">
+```bash
+node index.js --hot-full
+```
 
-Made with ❤️ for OpenClaw
+输出文件：
 
-</div>
+- `data/generated-hot-post.json`
+
+生成结果包含三部分：
+
+- `primaryPost`：主帖成稿
+- `viralTemplates`：仿爆款结构模板
+- `coinVariants`：按币种生成的多风格文案
+
+## 仿爆款模板
+
+当前会生成 3 类结构模板：
+
+- `contrarian-alert`：反常识预警型
+- `checklist-breakdown`：清单拆解型
+- `momentum-question`：情绪带问号型
+
+这些模板不会直接复制原帖，而是复用热帖常见的结构特征：
+
+- 强钩子开头
+- 明确币种焦点
+- 明确观点判断
+- 风险提醒
+- 互动式结尾
+
+## 币种多风格文案
+
+当前每个热点币种会生成 4 套风格：
+
+- `steady`：稳健型
+- `aggressive`：激进型
+- `debate`：争议型
+- `educational`：科普型
+
+如果你想把某一版文案选进待发布区，可以用：
+
+```bash
+node index.js --list-hot-drafts
+node index.js --select-hot-primary
+node index.js --select-hot-template contrarian-alert
+node index.js --select-hot-variant BNB aggressive
+```
+
+## 发布预览
+
+```bash
+node index.js --post
+```
+
+当前发布逻辑会：
+
+- 优先读取最新选中的热帖草稿
+- 如果没有 pending 草稿，再回退到旧的 `today-summary.json`
+- 打开 Binance Square 页面并尝试进入发布预览
+
+注意：
+
+- 要想真正进入发布预览，`data/binance-state.json` 需要是有效登录态
+- 如果登录态失效，脚本会打开页面但无法进入发布框
+
+## 定时任务
+
+查看当前调度配置：
+
+```bash
+node index.js --schedule-show
+```
+
+设置执行时间：
+
+```bash
+node index.js --schedule-set 09:00,12:00,20:30
+```
+
+设置时区：
+
+```bash
+node index.js --schedule-timezone Asia/Shanghai
+```
+
+设置执行管线：
+
+```bash
+node index.js --schedule-pipeline daily-report
+node index.js --schedule-pipeline hot-post
+node index.js --schedule-pipeline mixed
+```
+
+启用或关闭调度：
+
+```bash
+node index.js --scheduler-enable
+node index.js --scheduler-disable
+```
+
+启动调度器进程：
+
+```bash
+node index.js --scheduler
+```
+
+## 主要脚本说明
+
+- `index.js`：统一入口
+- `scripts/fetch-news.js`：资讯抓取
+- `scripts/generate-summary.js`：摘要生成
+- `scripts/generate-article.js`：日报草稿生成
+- `scripts/fetch-square-hot.js`：热帖抓取与过滤
+- `scripts/generate-hot-post.js`：热帖主帖、模板、币种文案生成
+- `scripts/select-hot-draft.js`：选择待发布草稿
+- `scripts/post-to-binance.js`：发布预览
+- `scripts/schedule-manager.js`：调度配置管理
+- `scripts/scheduler.js`：定时执行器
+- `scripts/state-manager.js`：待发布状态管理
+
+## 当前已实现但要注意的点
+
+- 热帖质量依赖 Binance Square 实时内容，榜单会随时间变化
+- 登录态文件不会提交到仓库，需要你本地自行生成
+- `data/` 下的大部分内容是本地运行产物，默认不提交 Git
+- 发布链路当前以“打开预览、人工确认”为主，不建议盲目自动发布
+
+## 推荐流程
+
+如果你想每天跑一轮热点内容，推荐使用这条流程：
+
+```bash
+node index.js --fetch-hot
+node index.js --generate-hot
+node index.js --list-hot-drafts
+node index.js --select-hot-variant BNB aggressive
+node index.js --post
+```
+
+如果你想让它自动定时跑，推荐先这样配置：
+
+```bash
+node index.js --schedule-set 09:00,12:00,20:30
+node index.js --schedule-pipeline hot-post
+node index.js --scheduler-enable
+node index.js --scheduler
+```
