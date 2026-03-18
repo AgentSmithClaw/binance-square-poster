@@ -26,11 +26,33 @@ const DEFAULT_CONFIG = {
     hotFeed: {
       enabled: true,
       url: 'https://www.binance.com/zh-CN/square',
+      apiPageUrl: 'https://www.binance.com/en/square',
       maxCards: 20,
+      pageSize: 20,
       maxPosts: 8,
+      minimumQualityScore: 25,
+      minimumViewCount: 200,
       scrollRounds: 3,
       headless: true,
       useSavedLoginState: true
+    },
+    hotGeneration: {
+      coinLimit: 3,
+      templateStyle: 'viral-cn',
+      styles: ['steady', 'aggressive', 'debate', 'educational']
+    },
+    symbolPool: {
+      mode: 'allowlist',
+      allowlist: ['BTC', 'ETH', 'SOL', 'BNB', 'XRP', 'DOGE', 'ADA', 'DOT', 'LTC', 'PEPE', 'NTRN'],
+      denylist: ['QC', 'FLOWUSDT', 'BTCUSDT', 'ETHUSDT']
+    },
+    images: {
+      enabled: true,
+      perPostLimit: 3,
+      maxDownloads: 3,
+      attachLimit: 1,
+      preferredSources: ['symbol-logo', 'post-image', 'chain-logo'],
+      attachOnPost: true
     }
   }
 };

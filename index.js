@@ -40,6 +40,8 @@ async function main() {
         await runScript('generate-article.js');
         break;
       case '--fetch-hot':
+      case '--hot-posts':
+      case '--square-hot':
         await runScript('fetch-square-hot.js');
         break;
       case '--generate-hot':
@@ -47,9 +49,15 @@ async function main() {
       case '--generate-variants':
         await runScript('generate-hot-post.js');
         break;
+      case '--find-images':
+      case '--fetch-images':
+      case '--related-images':
+        await runScript('find-related-images.js');
+        break;
       case '--hot-full':
         await runScript('fetch-square-hot.js');
         await runScript('generate-hot-post.js');
+        await runScript('find-related-images.js');
         break;
       case '--list-hot-drafts':
         await runScript('select-hot-draft.js', ['--list']);
@@ -97,7 +105,10 @@ Usage:
   node index.js --post
   node index.js --full
   node index.js --fetch-hot
+  node index.js --hot-posts
+  node index.js --square-hot
   node index.js --generate-hot
+  node index.js --find-images
   node index.js --hot-full
   node index.js --list-hot-drafts
   node index.js --select-hot-primary

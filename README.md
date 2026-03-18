@@ -256,3 +256,83 @@ node index.js --schedule-pipeline hot-post
 node index.js --scheduler-enable
 node index.js --scheduler
 ```
+
+## Hot Post Fetcher Update
+
+Stable hot post fetching now prefers Binance Square's live feed response and only falls back to DOM scanning if the feed response is unavailable.
+
+Run:
+
+```bash
+node index.js --hot-posts
+```
+
+Aliases:
+
+```bash
+node index.js --fetch-hot
+node index.js --square-hot
+```
+
+Output file:
+
+- `data/hot-posts.json`
+
+Key fields per post now include:
+
+- `postId`
+- `authorName`
+- `authorId`
+- `authorHandle`
+- `publishTime`
+- `contentText`
+- `likeCount`
+- `commentCount`
+- `shareCount`
+- `repostCount`
+- `viewCount`
+- `postUrl`
+- `topic`
+- `hashtags`
+- `symbols`
+- `sourcePage`
+- `fetchedAt`
+
+
+## Image Support
+
+The hot-post fetcher now also extracts image candidates from Binance Square feed data.
+
+Run image discovery after fetching hot posts:
+
+```bash
+node index.js --find-images
+```
+
+This downloads related images into:
+
+- `data/images/`
+- `data/related-images.json`
+
+Image selection priority is:
+
+- post images from the hot post itself
+- symbol logos from `tradingPairsV2.logoUrl`
+- chain logos as a fallback
+
+When you run:
+
+```bash
+node index.js --post
+```
+
+The browser posting flow will now automatically try to attach the downloaded image files before you publish manually.
+
+Recommended full flow:
+
+```bash
+node index.js --hot-posts
+node index.js --generate-hot
+node index.js --find-images
+node index.js --post
+```

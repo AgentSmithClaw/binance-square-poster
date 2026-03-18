@@ -12,16 +12,45 @@ const STOP_WORDS = new Set([
   'THE', 'THIS', 'THAT', 'WITH', 'FROM', 'YOUR', 'WILL', 'ABOUT', 'AFTER', 'TODAY',
   'MARKET', 'SQUARE', 'BINANCE', 'POST', 'POSTS', 'THREAD', 'THREADS', 'CRYPTO',
   'AND', 'FOR', 'ARE', 'BUT', 'NOT', 'YOU', 'HOW', 'WHY', 'WHAT', 'WHEN',
-  'FUTURE', 'BTCUSDT', 'ETHUSDT', 'USDT', 'USD'
+  'FUTURE', 'BTCUSDT', 'ETHUSDT', 'USDT', 'USD', 'GUYS', 'LOOK', 'THANKS',
+  'PRICE', 'PREDICTIONS', 'INSANE', 'BREAKING', 'FINALLY', 'GOOD', 'READY',
+  'OUT', 'MOON', 'FRIEND', 'COUSIN', 'BOUGHT', 'YEARS', 'AGO'
 ]);
 
 const DEFAULT_SYMBOLS = ['$BTC', '$ETH', '$SOL'];
-const DEFAULT_TAGS = ['#BTC', '#ETH', '#市场观察'];
-const DEFAULT_KEYWORDS = ['资金轮动', '情绪回暖', '短线博弈'];
+const DEFAULT_TAGS = ['#BTC', '#ETH', '#MarketWatch'];
+const DEFAULT_KEYWORDS = ['momentum', 'risk', 'breakout'];
 const STYLE_LIBRARY = ['steady', 'aggressive', 'debate', 'educational'];
+const KEYWORD_PATTERNS = [
+  /breakout/i,
+  /support/i,
+  /resistance/i,
+  /liquidation/i,
+  /volume/i,
+  /entry/i,
+  /target/i,
+  /short/i,
+  /long/i,
+  /whale/i,
+  /holders?/i,
+  /supply/i,
+  /momentum/i,
+  /pump/i,
+  /dump/i,
+  /trend/i,
+  /flow/i,
+  /rotation/i,
+  /bounce/i,
+  /reclaim/i,
+  /bull/i,
+  /bear/i,
+  /risk/i,
+  /setup/i,
+  /chart/i
+];
 
 function toLocalTimestamp(date = new Date()) {
-  return new Intl.DateTimeFormat('zh-CN', {
+  return new Intl.DateTimeFormat('en-CA', {
     hour12: false,
     timeZone: 'Asia/Shanghai',
     year: 'numeric',
@@ -29,28 +58,44 @@ function toLocalTimestamp(date = new Date()) {
     day: '2-digit',
     hour: '2-digit',
     minute: '2-digit'
-  }).format(date).replace(/\//g, '-');
+  }).format(date).replace(',', '');
+}
+
+function cleanText(value) {
+  return String(value || '').replace(/\s+/g, ' ').trim();
+}
+
+function isUsefulKeyword(word, posts) {
+  if (!word || STOP_WORDS.has(word)) return false;
+  if (word.length < 4) return false;
+  if (/^\d/.test(word)) return false;
+  if (!/[A-Z]/.test(word)) return false;
+
+  const mentions = posts.filter(post => cleanText(`${post.title || ''} ${post.excerpt || ''}`).toUpperCase().includes(word)).length;
+  return mentions >= 2 || KEYWORD_PATTERNS.some(pattern => pattern.test(word));
 }
 
 function frequencyMap(posts) {
   const score = new Map();
 
   for (const post of posts) {
+    const weight = post.finalScore || post.hotScore || 0;
+
     for (const symbol of post.symbols || []) {
-      score.set(symbol, (score.get(symbol) || 0) + (post.finalScore || post.hotScore || 0));
+      score.set(symbol, (score.get(symbol) || 0) + weight);
     }
 
     for (const tag of post.hashtags || []) {
-      score.set(tag, (score.get(tag) || 0) + (post.finalScore || post.hotScore || 0));
+      score.set(tag, (score.get(tag) || 0) + weight);
     }
 
-    const words = String(post.title || post.excerpt || '')
+    const words = cleanText(post.title || post.excerpt || '')
       .toUpperCase()
       .match(/[A-Z]{3,}/g) || [];
 
     for (const word of words) {
-      if (STOP_WORDS.has(word)) continue;
-      score.set(word, (score.get(word) || 0) + Math.max(20, Math.round((post.finalScore || 0) / 50)));
+      if (!isUsefulKeyword(word, posts)) continue;
+      score.set(word, (score.get(word) || 0) + Math.max(20, Math.round(weight / 50)));
     }
   }
 
@@ -60,26 +105,29 @@ function frequencyMap(posts) {
 }
 
 function extractCleanKeywords(ranked) {
-  return ranked
-    .map(item => String(item.token || '').trim())
-    .filter(token => !token.startsWith('$'))
-    .filter(token => !token.startsWith('#'))
-    .filter(token => !STOP_WORDS.has(token.toUpperCase()))
-    .slice(0, 5);
+  return Array.from(new Set(
+    ranked
+      .map(item => String(item.token || '').trim())
+      .filter(token => !token.startsWith('$'))
+      .filter(token => !token.startsWith('#'))
+      .filter(token => !STOP_WORDS.has(token.toUpperCase()))
+      .filter(token => token.length >= 4)
+      .map(token => token.toUpperCase())
+  )).slice(0, 5);
 }
 
 function summarizePosts(posts) {
   return posts.slice(0, 3).map((post, index) => {
-    const hook = post.symbols[0] || post.hashtags[0] || '热门话题';
-    const line = String(post.excerpt || post.title || '').replace(/\s+/g, ' ').trim();
+    const hook = post.symbols[0] || post.hashtags[0] || 'hot topic';
+    const line = cleanText(post.excerpt || post.title || '');
     return `${index + 1}. ${hook}: ${line.slice(0, 56)}`;
   });
 }
 
 function makeContext(posts) {
   const ranked = frequencyMap(posts);
-  const topSymbols = ranked.filter(item => item.token.startsWith('$')).slice(0, 5).map(item => item.token);
-  const topTags = ranked.filter(item => item.token.startsWith('#')).slice(0, 5).map(item => item.token);
+  const topSymbols = Array.from(new Set(ranked.filter(item => item.token.startsWith('$')).map(item => item.token))).slice(0, 5);
+  const topTags = Array.from(new Set(ranked.filter(item => item.token.startsWith('#')).map(item => item.token))).slice(0, 5);
   const keywords = extractCleanKeywords(ranked);
 
   return {
@@ -97,53 +145,43 @@ function makeContext(posts) {
 function detectMarketAngle(posts) {
   const joined = posts.map(post => `${post.title} ${post.rawText}`).join(' ');
 
-  if (/爆仓|止损|做空|做多|合约|杠杆/u.test(joined)) {
-    return '合约情绪和短线博弈明显升温';
-  }
-  if (/突破|站稳|新高|拉升/u.test(joined)) {
-    return '市场更偏向追逐突破和延续';
-  }
-  if (/回踩|支撑|震荡|反弹/u.test(joined)) {
-    return '市场还在震荡区间里找方向';
-  }
-  return '市场情绪正在围绕热点币种快速轮动';
+  if (/liquidation|short|long|contract|leverage/i.test(joined)) return 'Contract sentiment and short-term positioning are heating up.';
+  if (/breakout|reclaim|new high|bull/i.test(joined)) return 'The feed is leaning toward breakout continuation rather than mean reversion.';
+  if (/support|bounce|range|pullback/i.test(joined)) return 'The market still looks range-bound and reactive around key levels.';
+  return 'Attention is rotating quickly across a handful of liquid symbols.';
 }
 
 function detectRiskLine(posts) {
   const joined = posts.map(post => `${post.title} ${post.rawText}`).join(' ');
 
-  if (/爆仓|杠杆|合约/u.test(joined)) {
-    return '这类行情最怕的不是没机会，而是重仓上杠杆后被一次反抽打掉节奏。';
-  }
-  if (/突破|站稳/u.test(joined)) {
-    return '真正能走远的不是第一次冲高，而是冲高之后还能稳住关键位置。';
-  }
-  return '越是热度上来的时候，越要先想清楚失效条件，再考虑进场。';
+  if (/liquidation|leverage|contract/i.test(joined)) return 'The biggest risk here is not missing the move, but getting trapped with leverage when the market snaps back.';
+  if (/breakout|reclaim/i.test(joined)) return 'A breakout matters less than whether price can hold the level after the first push.';
+  return 'When heat builds fast, define the invalidation before thinking about size.';
 }
 
 function buildPrimaryPost(context) {
   const [s1, s2, s3] = context.topSymbols;
   const angle = detectMarketAngle(context.topPosts);
   const riskLine = detectRiskLine(context.topPosts);
-  const title = `币安广场热帖观察 | ${context.timestamp}`;
+  const title = `Binance Square Hot Feed | ${context.timestamp}`;
   const body = [
     title,
     '',
-    '刚刷完这一轮广场热帖，我的直观感受是：',
+    'Quick read after scanning the latest Square hot posts:',
     angle,
     '',
-    `当前被反复提到最多的币种是 ${s1}、${s2 || s1}、${s3 || s2 || s1}。`,
-    `对应的关注点主要集中在 ${context.keywords.join('、')}。`,
+    `The symbols showing up most often are ${s1}, ${s2 || s1}, and ${s3 || s2 || s1}.`,
+    `The recurring signals are ${context.keywords.join(', ')}.`,
     '',
-    '我整理出的热帖重点：',
+    'Top notes from the feed:',
     ...context.summaries,
     '',
-    '我的判断：',
-    `${s1} 仍然是现在最强的流量中心，但真正值得盯的，不只是它涨没涨，而是热度能不能继续外溢到第二梯队。`,
+    'My take:',
+    `${s1} is still the strongest attention center, but the real question is whether that heat spills into the second tier or dies at the headline level.`,
     riskLine,
-    '如果你准备发帖，最容易出互动的写法，依然是“明确观点 + 条件判断 + 风险提醒”。',
+    'If you want engagement, the safest structure is still: clear view + condition + risk reminder.',
     '',
-    '你今天更关注哪个币的短线机会？欢迎留言交流。'
+    'Which symbol are you watching most closely right now?'
   ].join('\n');
 
   return { title, content: body };
@@ -151,48 +189,48 @@ function buildPrimaryPost(context) {
 
 function buildViralTemplates(context) {
   const [s1, s2, s3] = context.topSymbols;
-  const [k1, k2, k3] = context.keywords;
-  const tag = context.topTags[0] || '#交易';
+  const [k1, k2, k3] = context.keywords.length ? context.keywords : DEFAULT_KEYWORDS;
+  const tag = context.topTags[0] || '#MarketWatch';
 
   return [
     {
       templateId: 'contrarian-alert',
-      name: '反常识预警型',
-      structure: ['先抛出反常识观点', '对比主流预期', '点出关键条件', '给风控提醒', '用问题收尾'],
+      name: 'Contrarian Alert',
+      structure: ['open with a counter-view', 'compare with crowd narrative', 'set the trigger', 'add risk', 'end with a question'],
       content: [
-        `很多人今天都在盯 ${s1}，但我反而觉得，真正值得提前看的是 ${s2 || s1}。`,
-        `${s1} 的热度已经很高了，高热度不一定等于高性价比；真正容易放大利润的，往往是刚开始被市场重新定价的方向。`,
-        `我现在最在意的不是它还能不能继续冲，而是 ${k1} 和 ${k2 || k1} 会不会同步强化。`,
-        `如果 ${s1} 能稳住、${s2 || s1} 又开始放量，那情绪很可能继续扩散；如果量能跟不上，就别在高位硬接。`,
-        `你觉得下一波更有弹性的，会是 ${s1} 还是 ${s2 || s1}？ ${tag}`.trim()
+        `Most people are staring at ${s1}, but the more interesting setup may be ${s2 || s1}.`,
+        `${s1} already has the attention. That does not automatically make it the best risk-reward trade from here.`,
+        `The part I care about most is whether ${k1} and ${k2 || k1} strengthen together.`,
+        `If ${s1} holds and ${s2 || s1} starts expanding in volume, the move can spread. If not, chasing becomes expensive fast.`,
+        `Which one has more upside from here: ${s1} or ${s2 || s1}? ${tag}`
       ].join('\n')
     },
     {
       templateId: 'checklist-breakdown',
-      name: '清单拆解型',
-      structure: ['一句话结论', '三条观察', '执行建议', '评论区提问'],
+      name: 'Checklist Breakdown',
+      structure: ['one-line thesis', 'three checks', 'execution note', 'close with interaction'],
       content: [
-        `今天广场最强的讨论主线，基本都绕不开 ${s1}。`,
+        `Today's strongest discussion thread still runs through ${s1}.`,
         '',
-        '我会先盯这 3 件事：',
-        `1. ${s1} 的热度有没有继续扩散到 ${s2 || s1}`,
-        `2. ${k1} 和 ${k2 || k1} 是不是从情绪词，变成了真实交易信号`,
-        `3. 热门帖里出现的风险提醒，是不是越来越多`,
+        'Three things I would check first:',
+        `1. Is ${s1} still absorbing attention, or is it rotating into ${s2 || s1}?`,
+        `2. Are ${k1} and ${k2 || k1} showing up as actual trading signals instead of hype phrases?`,
+        `3. Are risk warnings increasing at the same time as bullish calls?`,
         '',
-        '如果这三条能同时成立，我才会把它当成可以跟的短线题材；少一条，都更像情绪冲高。',
-        `你会把今天的主要注意力放在 ${s1}，还是 ${s3 || s2 || s1}？`
+        'If all three line up, it is a tradable theme. If not, it is probably just another emotional spike.',
+        `Where is your focus today: ${s1}, ${s3 || s2 || s1}, or neither?`
       ].join('\n')
     },
     {
       templateId: 'momentum-question',
-      name: '情绪带问号型',
-      structure: ['先说情绪变化', '点出强势币', '给出自己的看法', '结尾抛问题'],
+      name: 'Momentum Question',
+      structure: ['describe the shift', 'name the leader', 'share your read', 'end with a direct question'],
       content: [
-        '这两天广场的节奏很明显，大家已经不是在单纯讨论涨跌，而是在抢“下一只最能带情绪的币”。',
-        `从我刷到的内容看，${s1} 还是流量中心，但 ${s2 || s1} 的讨论效率正在往上追。`,
-        `如果你做短线，我更建议盯住 ${k1} 和 ${k3 || k2 || k1} 这两个信号，它们往往比价格更早暴露资金偏好。`,
-        `我自己的顺序是先看 ${s1}，再看 ${s2 || s1} 有没有补涨确认。`,
-        '你会先做龙头，还是先埋伏第二梯队？'
+        'The feed is no longer just arguing about direction. It is hunting for the next symbol that can carry attention by itself.',
+        `Right now ${s1} is still the leader, but ${s2 || s1} is starting to close the gap in discussion quality.`,
+        `If you trade short term, I would watch ${k1} and ${k3 || k2 || k1} before watching raw emotion. Those signals usually show intent faster than price talk does.`,
+        `My order is simple: watch ${s1} first, then see whether ${s2 || s1} confirms the spillover.`,
+        'Would you rather trade the leader or position early in the second wave?'
       ].join('\n')
     }
   ];
@@ -203,52 +241,52 @@ function sanitizeSymbol(symbol) {
 }
 
 function buildStyleVariant(symbol, context, style) {
-  const [k1, k2, k3] = context.keywords;
+  const [k1, k2, k3] = (context.keywords && context.keywords.length ? context.keywords : DEFAULT_KEYWORDS);
   const hotLeader = context.primarySymbol;
 
   switch (style) {
     case 'steady':
       return {
         style,
-        title: `${symbol} 稳健版`,
+        title: `${symbol} Steady`,
         content: [
-          `${symbol} 最近的讨论度明显在升温，但真正值得关注的，还是确认信号有没有跟上。`,
-          `如果 ${k1} 和 ${k2 || k1} 同时强化，我会更愿意把它看成一段可以跟随的延续行情。`,
-          '我的做法通常是先等回踩、等确认、再考虑跟，而不是在情绪最满的时候抢最后一棒。',
-          `你会把 ${symbol} 放进这两天的重点观察列表吗？`
+          `${symbol} is getting more attention, but the real question is whether the signal quality is improving with it.`,
+          `If ${k1} and ${k2 || k1} keep showing up together, I would treat that as continuation instead of noise.`,
+          'My default is still to wait for confirmation rather than chase the most emotional candle.',
+          `Is ${symbol} on your watchlist right now?`
         ].join('\n')
       };
     case 'aggressive':
       return {
         style,
-        title: `${symbol} 激进版`,
+        title: `${symbol} Aggressive`,
         content: [
-          `${symbol} 这波热度不是假的，短线资金已经开始明显往这里堆。`,
-          `只要 ${k1} 继续强化，这种情绪就可能进一步放大，拉升速度会比很多人预期更快。`,
-          '这种时候最怕的不是没机会，而是看懂了却不敢上。',
-          `你觉得 ${symbol} 这一脚是启动，还是要直接进入加速段？`
+          `${symbol} is pulling in real attention, and short-term money is starting to cluster around it.`,
+          `If ${k1} keeps strengthening, the move can expand faster than most people expect.`,
+          'The risk is obvious, but so is the opportunity if the signal stays clean.',
+          `Do you see ${symbol} as a starter move or the acceleration phase?`
         ].join('\n')
       };
     case 'debate':
       return {
         style,
-        title: `${symbol} 争议版`,
+        title: `${symbol} Debate`,
         content: [
-          `很多人会把 ${symbol} 直接归类成情绪票，但我不完全认同。`,
-          `如果它只是虚火，那 ${k1} 和 ${k3 || k1} 不会一起出现；一旦这两个信号共振，说明资金并不只是路过。`,
-          '真正值得讨论的，不是它今天涨了多少，而是这种热度有没有可能演变成下一阶段主线。',
-          `你站哪边，${symbol} 现在更像噪音，还是机会？`
+          `A lot of people will call ${symbol} pure hype. I do not think it is that simple.`,
+          `If ${k1} and ${k3 || k1} keep appearing together, that usually means real intent is hiding inside the noise.`,
+          'The better question is not how much it moved today, but whether the attention can mature into a tradable theme.',
+          `Is ${symbol} noise, or is the market still underpricing it?`
         ].join('\n')
       };
     default:
       return {
         style: 'educational',
-        title: `${symbol} 科普版`,
+        title: `${symbol} Educational`,
         content: [
-          `如果你最近在看 ${symbol}，先别急着只盯涨跌。`,
-          `更有用的看法通常来自三个维度：热度有没有持续、${hotLeader} 的强势有没有外溢、以及风险提示有没有同步增加。`,
-          '短线交易真正有价值的信息，往往不是一句喊单，而是“观点 + 条件 + 风控”同时成立。',
-          `你平时会怎么判断 ${symbol} 是机会，还是陷阱？`
+          `If you are tracking ${symbol}, do not just watch the last candle.`,
+          `A better read comes from three things: sustained attention, spillover from ${hotLeader}, and whether risk warnings rise with the hype.`,
+          'The most useful posts are not the loudest ones. They usually combine a view, a trigger, and a risk condition.',
+          `How do you decide whether ${symbol} is opportunity or trap?`
         ].join('\n')
       };
   }
@@ -276,7 +314,9 @@ function main() {
     ? config.square.hotGeneration.styles
     : STYLE_LIBRARY;
   const coinLimit = Number(config.square?.hotGeneration?.coinLimit || 3);
-  const posts = hotData.posts.slice(0, 5);
+  const posts = [...hotData.posts]
+    .sort((a, b) => ((b.tradingSignalScore || 0) - (a.tradingSignalScore || 0)) || ((b.finalScore || 0) - (a.finalScore || 0)))
+    .slice(0, 5);
   const context = makeContext(posts);
   const primaryPost = buildPrimaryPost(context);
   const viralTemplates = buildViralTemplates(context);
@@ -294,16 +334,16 @@ function main() {
   };
 
   writeJson(OUTPUT_PATH, output);
-  stateManager.setPendingPost(DEFAULT_GROUP_ID, primaryPost.content, 'hot-post', 30 * 60 * 1000, '热帖草稿已生成');
+  stateManager.setPendingPost(DEFAULT_GROUP_ID, primaryPost.content, 'hot-post', 30 * 60 * 1000, 'Hot-post draft generated');
 
   console.log(primaryPost.content);
-  console.log('\n========== 仿爆款模板 ==========');
+  console.log('\n========== Viral Templates ==========' );
   viralTemplates.forEach((template, index) => {
     console.log(`\n[${index + 1}] ${template.name}`);
     console.log(template.content);
   });
 
-  console.log('\n========== 币种多风格文案 ==========');
+  console.log('\n========== Coin Variants ==========' );
   coinVariants.forEach(group => {
     console.log(`\n${group.symbol}`);
     group.variants.forEach((variant, index) => {
